@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^1.3.0"
+    "@types/zmq": "0.0.22",
+    "cheerio": "^1.0.0-rc.2",
+    "ventilator": "github:meel-io/ventilator",
+    "zmq": "^2.15.3"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
