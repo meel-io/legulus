@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint --ignore-path .gitignore ."
+    "pretest": "eslint --ignore-path .gitignore .",
+    "start": "node src/main.js start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/zmq": "0.0.22",
     "cheerio": "^1.0.0-rc.2",
-    "commander": "^2.15.1",
+    "readable-stream": "^2.3.6",
     "ventilator": "github:meel-io/ventilator",
     "zmq": "^2.15.3"
   },

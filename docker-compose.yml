@@ -8,6 +8,11 @@ services:
      - .:/usr/src/app
     depends_on:
      - mongo
+    environment:
+     - DISPATCHER_PORT=5017
+     - SINK_PORT=5016
 
   mongo:
     image: mongo
+    volumes:
+     - /usr/local/share/data:/data/db
