@@ -1,4 +1,4 @@
-const { Worker } = require('ventilaor')
+const { Worker } = require('ventilator')
 const Pino = require('pino')
 
 const { DISPATCHER_PORT, SINK_PORT } = process.env

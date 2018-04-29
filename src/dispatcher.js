@@ -1,16 +1,17 @@
 const fs = require('fs')
-const { Dispatcher } = require('ventilaor')
+const path = require('path')
+const { Dispatcher } = require('ventilator')
 const Pino = require('pino')
 
-const customPath = '../data/data.json'
-const defaultPath = '../data/data.json.dist'
+const customPath = path.join(__dirname, '../data/data.json')
+const defaultPath = path.join(__dirname, '../data/data.json.dist')
 
 const { DISPATCHER_PORT } = process.env
 
 const main = () => {
   fs.stat(customPath, (err, stats) => {
-    const path = (err) ? defaultPath : customPath
-    const inputStream = fs.createReadStream(path)
+    const fileName = (err) ? defaultPath : customPath
+    const inputStream = fs.createReadStream(fileName)
 
     const dispatcher = new Dispatcher(DISPATCHER_PORT, new Pino())
     dispatcher.run(inputStream)

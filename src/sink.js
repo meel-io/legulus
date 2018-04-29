@@ -1,4 +1,4 @@
-const { Sink } = require('ventilaor')
+const { Sink } = require('ventilator')
 const Pino = require('pino')
 
 const { SINK_PORT } = process.env
