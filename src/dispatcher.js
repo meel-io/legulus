@@ -1,5 +1,6 @@
 const fs = require('fs')
 const { Dispatcher } = require('ventilaor')
+const Pino = require('pino')
 
 const customPath = '../data/data.json'
 const defaultPath = '../data/data.json.dist'
@@ -11,7 +12,7 @@ const main = () => {
     const path = (err) ? defaultPath : customPath
     const inputStream = fs.createReadStream(path)
 
-    const dispatcher = new Dispatcher(DISPATCHER_PORT)
+    const dispatcher = new Dispatcher(DISPATCHER_PORT, new Pino())
     dispatcher.run(inputStream)
   })
 }
