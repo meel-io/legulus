@@ -1,7 +1,7 @@
 const request = require('request-promise-native')
 const cheerio = require('cheerio')
 
-const scrap = async (url) => {
+const scrap = (url) => {
   var options = {
     uri: url,
     transform: function (body) {

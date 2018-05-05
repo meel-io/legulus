@@ -1,9 +1,26 @@
+const cheerio = require('cheerio')
+
 const getSection = (sectionName, html) => {
-  return html(`div:contains('${sectionName}')`).closest('section')
+  return html(`h3:contains('${sectionName}')`).closest('section')
 }
 
 const getNutrition = (html) => {
-  return getSection('Nutrition', html).children('tr').toArray()
+  const section = getSection('Nutrition', html)
+
+  const allRows = section.find('tbody').children('tr').toArray()
+
+  allRows.splice(-1, 1)
+  return allRows.map(row => {
+    const parsedRow = cheerio.load(row)
+
+    const key = parsedRow('td:nth-child(1)').text()
+    const value = parsedRow('td:nth-child(2)').text()
+
+    const result = {}
+    result[key.toLowerCase()] = parseFloat(value)
+
+    return result
+  })
 }
 
-module.exports = { getNutrition, getSection }
+module.exports = { getNutrition }
