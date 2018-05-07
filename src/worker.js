@@ -1,10 +1,14 @@
 const { Worker } = require('ventilator')
+const { scrapProduct } = require('./product')
+const { persistProduct } = require('./db')
 const Pino = require('pino')
 
 const { DISPATCHER_PORT, SINK_PORT } = process.env
 
-const doSomething = (row) => {
-  return row
+const doSomething = async (row) => {
+  const product = await scrapProduct(row)
+
+  await persistProduct(product)
 }
 
 const main = () => {

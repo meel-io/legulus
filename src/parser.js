@@ -10,17 +10,17 @@ const getNutrition = (html) => {
   const allRows = section.find('tbody').children('tr').toArray()
 
   allRows.splice(-1, 1)
-  return allRows.map(row => {
+
+  return allRows.reduce((result, row) => {
     const parsedRow = cheerio.load(row)
 
     const key = parsedRow('td:nth-child(1)').text()
     const value = parsedRow('td:nth-child(2)').text()
 
-    const result = {}
     result[key.toLowerCase()] = parseFloat(value)
 
     return result
-  })
+  }, {})
 }
 
 module.exports = { getNutrition }

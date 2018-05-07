@@ -7,7 +7,16 @@ const connect = async () => {
     throw error
   })
 
-  return client.db(DATABASE_NAME)
+  return client
 }
 
-module.exports = { connect }
+const persistProduct = async product => {
+  const client = await connect()
+
+  const db = client.db(DATABASE_NAME)
+  await db.collection('products').insertOne(product)
+
+  client.close()
+}
+
+module.exports = { persistProduct }
