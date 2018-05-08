@@ -14,7 +14,9 @@ module.exports = {
     },
     {
       name: 'WORKER',
-      script: 'src/worker.js'
+      script: 'src/worker.js',
+      instances: 2,
+      exec_mode: 'fork'
     }
   ]
 }

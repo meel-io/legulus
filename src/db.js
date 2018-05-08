@@ -11,10 +11,14 @@ const connect = async () => {
 }
 
 const persistProduct = async product => {
-  const client = await connect()
+  const client = await connect().catch(error => {
+    throw new Error(`Could not connect to the database: ${error.message}`)
+  })
 
   const db = client.db(DATABASE_NAME)
-  await db.collection('products').insertOne(product)
+  await db.collection('products').insertOne(product).catch(error => {
+    throw new Error(`Could not insert product to the database: ${error.message}`)
+  })
 
   client.close()
 }
