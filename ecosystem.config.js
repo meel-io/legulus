@@ -6,17 +6,27 @@ module.exports = {
   apps: [
     {
       name: 'DISPATCHER',
-      script: 'src/dispatcher.js'
+      script: 'src/dispatcher.js',
+      env: {
+        'DISPATCHER_PORT': '5016'
+      }
     },
     {
       name: 'SINK',
-      script: 'src/sink.js'
+      script: 'src/sink.js',
+      env: {
+        'SINK_PORT': '5017'
+      }
     },
     {
       name: 'WORKER',
       script: 'src/worker.js',
       instances: 2,
-      exec_mode: 'fork'
+      exec_mode: 'fork',
+      env: {
+        'DISPATCHER_PORT': '5016',
+        'SINK_PORT': '5017'
+      }
     }
   ]
 }

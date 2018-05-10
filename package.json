@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "start": "node src/main.js start"
+    "start": "pm2 start ecosystem.config.js"
   },
   "author": "",
   "license": "ISC",
