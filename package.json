@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "start": "pm2 start ecosystem.config.js"
+    "start": "pm2 start ecosystem.config.js",
+    "sink": "SINK_PORT='5017' node src/sink.js",
+    "dispatcher": "DISPATCHER_PORT='5016' node src/dispatcher.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/zmq": "0.0.22",
     "cheerio": "^1.0.0-rc.2",
-    "mongodb": "^3.0.7",
+    "mongodb": "^3.0.8",
     "pino": "^4.16.1",
     "pm2": "^2.10.3",
     "readable-stream": "^2.3.6",

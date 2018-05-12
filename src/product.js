@@ -7,12 +7,17 @@ const scrapProduct = async (id) => {
   const productUrl = getUrl(id)
 
   const response = await scrap(productUrl).catch(error => {
-    throw new Error(`Could not scrap product from website: ${error.message}`)
+    return {
+      error: new Error(`Could not scrap product from website: ${error.message}`)
+    }
   })
 
   return {
-    id,
-    nutrition: getNutrition(response)
+    error: null,
+    product: {
+      id,
+      nutrition: getNutrition(response)
+    }
   }
 }
 
