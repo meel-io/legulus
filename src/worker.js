@@ -6,8 +6,7 @@ const Pino = require('pino')
 const { DISPATCHER_PORT, SINK_PORT } = process.env
 
 const doSomething = async (row, logger) => {
-  const productId = row.toString('utf8')
-  const {error, product} = await scrapProduct(productId)
+  const {error, product} = await scrapProduct(row)
 
   if (error) {
     return { error }
