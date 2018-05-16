@@ -1,32 +1,36 @@
-const Hapi = require('hapi')
+const http = require('http')
 const { Dispatcher } = require('ventilator')
 const Pino = require('pino')
 
-const { DISPATCHER_LISTEN, DISPATCHER_HOST, DISPATCHER_PORT } = process.env
+const { DISPATCHER_PORT, DISPATCHER_SERVER_HOST, DISPATCHER_SERVER_PORT } = process.env
 
-const server = Hapi.server({
-  host: DISPATCHER_HOST,
-  port: DISPATCHER_LISTEN
-})
+const main = () => {
+  http.createServer(handle, { hostname: DISPATCHER_SERVER_HOST })
+    .listen(DISPATCHER_SERVER_PORT)
+}
 
-server.route({
-  method: 'POST',
-  path: '/',
-  handler: (request) => {
-    const dispatcher = new Dispatcher(DISPATCHER_PORT, new Pino())
-    dispatcher.run(request)
+const handle = (req, res) => {
+  if (req.method === 'POST') {
+    post(req, res)
+    return
   }
-})
+  reject(405, 'Method Not Allowed', res)
+}
 
-async function start () {
-  try {
-    await server.start()
-  } catch (err) {
-    console.log(err)
-    process.exit(1)
+const post = (req, res) => {
+  const size = parseInt(req.headers['content-length'], 10)
+  if (isNaN(size)) {
+    reject(400, 'Bad Request', res)
+    return
   }
 
-  console.log('Server running at:', server.info.uri)
-};
+  const dispatcher = new Dispatcher(DISPATCHER_PORT, new Pino())
+  dispatcher.run(req)
+}
 
-start()
+const reject = (code, msg, res) => {
+  res.statusCode = code
+  res.end(msg)
+}
+
+main()

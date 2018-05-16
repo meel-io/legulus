@@ -8,8 +8,8 @@ module.exports = {
       name: 'DISPATCHER',
       script: 'src/dispatcher.js',
       env: {
-        'DISPATCHER_HOST': 'localhost',
-        'DISPATCHER_LISTEN': '3000',
+        'DISPATCHER_SERVER_HOST': 'localhost',
+        'DISPATCHER_SERVER_PORT': '3000',
         'DISPATCHER_PORT': '5016'
       }
     },
