@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "start": "pm2 start ecosystem.config.js",
+    "start": "fuge shell fuge/fuge.yml",
     "sink": "SINK_PORT='5017' node src/sink/index.js",
-    "dispatcher":
-      "DISPATCHER_PORT='5016' DISPATCHER_SERVER_HOST='localhost' DISPATCHER_SERVER_PORT='3000' node src/dispatcher/index.js",
+    "dispatcher": "DISPATCHER_PORT='5016' DISPATCHER_SERVER_HOST='localhost' DISPATCHER_SERVER_PORT='3000' node src/dispatcher/index.js",
     "worker": "DISPATCHER_PORT='5016' SINK_PORT='5017' node src/worker/index.js"
   },
   "author": "",
@@ -16,10 +15,8 @@
   "dependencies": {
     "@types/zmq": "0.0.22",
     "cheerio": "^1.0.0-rc.2",
-    "hapi": "^17.4.0",
     "mongodb": "^3.0.8",
     "pino": "^4.16.1",
-    "pm2": "^2.10.3",
     "readable-stream": "^2.3.6",
     "request": "^2.85.0",
     "request-promise-native": "^1.0.5",
