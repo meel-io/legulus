@@ -1,0 +1,9 @@
+[submodule "src/worker"]
+	path = src/worker
+	url = https://github.com/meel-io/legulus-worker
+[submodule "src/sink"]
+	path = src/sink
+	url = https://github.com/meel-io/legulus-sink
+[submodule "src/dispatcher"]
+	path = src/dispatcher
+	url = https://github.com/meel-io/legulus-dispatcher

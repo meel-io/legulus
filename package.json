@@ -1,14 +1,15 @@
 {
-  "name": "tesco-scrapper",
+  "name": "legulus",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
     "start": "pm2 start ecosystem.config.js",
-    "sink": "SINK_PORT='5017' node src/sink.js",
-    "dispatcher": "DISPATCHER_PORT='5016' DISPATCHER_SERVER_HOST='localhost' DISPATCHER_SERVER_PORT='3000' node src/dispatcher.js",
-    "worker": "DISPATCHER_PORT='5016' SINK_PORT='5017' node src/worker.js"
+    "sink": "SINK_PORT='5017' node src/sink/index.js",
+    "dispatcher":
+      "DISPATCHER_PORT='5016' DISPATCHER_SERVER_HOST='localhost' DISPATCHER_SERVER_PORT='3000' node src/dispatcher/index.js",
+    "worker": "DISPATCHER_PORT='5016' SINK_PORT='5017' node src/worker/index.js"
   },
   "author": "",
   "license": "ISC",
