@@ -1,4 +1,9 @@
 fuge_global:
+  dns_enabled: true
+  dns_host: 127.0.0.1
+  dns_port: 53053
+  dns_suffix: svc.cluster.local
+  dns_namespace: micro
   monitor: true
   monitor_excludes:
     - '**/node_modules/**'
@@ -6,23 +11,17 @@ fuge_global:
 dispatcher:
   type: process
   path: ../src/dispatcher
-  run: node src/index.js
+  run: DISPATCHER_QUEUE='jobs_queue' node src/index.js
   ports:
     - port=3000
-    - dispatcher=5016
 worker:
   type: process
   path: ../src/worker
-  run: node src/index.js
-  ports:
-    - dispatcher=5016
-    - sink=5017
+  run: DISPATCHER_QUEUE='jobs_queue' SINK_QUEUE='collection_queue' node src/index.js
 sink:
   type: process
   path: ../src/sink
-  run: node src/index.js
-  ports:
-    - sink=5017
+  run: SINK_QUEUE='collection_queue' node src/index.js
 mongo:
   image: mongo
   type: container
