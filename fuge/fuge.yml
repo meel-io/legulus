@@ -11,17 +11,17 @@ fuge_global:
 dispatcher:
   type: process
   path: ../src/dispatcher
-  run: DISPATCHER_QUEUE='jobs_queue' node src/index.js
+  run: npm start
   ports:
     - port=3000
 worker:
   type: process
   path: ../src/worker
-  run: DISPATCHER_QUEUE='jobs_queue' SINK_QUEUE='collection_queue' node src/index.js
+  run: npm start
 sink:
   type: process
   path: ../src/sink
-  run: SINK_QUEUE='collection_queue' node src/index.js
+  run: npm start
 mongo:
   image: mongo
   type: container
