@@ -12,16 +12,19 @@ dispatcher:
   type: process
   path: ../src/dispatcher
   run: npm start
+  env_file: ./.env
   ports:
     - port=3000
 worker:
   type: process
   path: ../src/worker
   run: npm start
+  env_file: ./.env
 sink:
   type: process
   path: ../src/sink
   run: npm start
+  env_file: ./.env
 mongo:
   image: mongo
   type: container
